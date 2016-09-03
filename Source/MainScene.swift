@@ -6,9 +6,12 @@ class MainScene: CCScene {
     weak var player: CCSprite!
     
     var stickActive: Bool = false
-    var velocity: CGPoint = CGPointMake(0, 0)
+    var velocity: CGPoint = CGPointZero
     var angularVelocity: CGFloat = 0
     var location: CGPoint!
+    
+    // Set the speed of the player's movement 
+    var speed: CGFloat = 0.1
     
     override init!() {
         super.init()
@@ -54,7 +57,7 @@ class MainScene: CCScene {
                 joystick.position = CGPointMake(dpad.position.x - xDist, dpad.position.y + yDist)
             }
             
-            self.velocity = ccp(xDist * -0.1, yDist * 0.1)
+            self.velocity = ccp(xDist * -speed, yDist * speed)
             
             self.angularVelocity = -(degree - 90)
         }
