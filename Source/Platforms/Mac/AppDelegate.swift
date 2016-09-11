@@ -27,15 +27,15 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
     @IBOutlet weak var window: NSWindow!
     @IBOutlet weak var glView: CCGLView!
     
-    func applicationDidFinishLaunching(notification: NSNotification) {
+    func applicationDidFinishLaunching(_ notification: Notification) {
         // Get the director
-        let director = CCDirector.sharedDirector() as! CCDirectorMac
+        let director = CCDirector.shared() as! CCDirectorMac
         
         // enable FPS and SPF
         director.displayStats = true
         
-        let defaultWinSize = CGSizeMake(568, 384)
-        window.setFrame(CGRect(origin: CGPointZero, size: defaultWinSize), display: true)
+        let defaultWinSize = CGSize(width: 568, height: 384)
+        window.setFrame(CGRect(origin: CGPoint.zero, size: defaultWinSize), display: true)
         window.delegate = self
         glView.frame = window.frame
         
@@ -51,7 +51,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         // You can use anything you want, and completely dropping extensions will in most cases automatically scale the artwork correct
         // To make it easy to understand what resolutions I am using, I have changed this for this demo to -4x -2x and -1x
         // Notice that I deliberately added some of the artwork without extensions
-        CCFileUtils.sharedFileUtils().suffixesDict = [CCFileUtilsSuffixiPad : "-2x",
+        CCFileUtils.shared().suffixesDict = [CCFileUtilsSuffixiPad : "-2x",
             CCFileUtilsSuffixiPadHD    : "-4x",
             CCFileUtilsSuffixiPhone    : "-1x",
             CCFileUtilsSuffixiPhoneHD  : "-1x",
@@ -64,14 +64,14 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         
         // Create a scene
         //let mainScene = MainScene()
-        let mainScene = CCBReader.loadAsScene("MainScene") //MainScene()
+        let mainScene = CCBReader.load(asScene: "MainScene") //MainScene()
         
         // Run the director with the initial scene
-        director.runWithScene(mainScene)
+        director.run(with: mainScene)
     }
     
-    func windowWillClose(notification: NSNotification) {
-        CCDirector.sharedDirector().end()
+    func windowWillClose(_ notification: Notification) {
+        CCDirector.shared().end()
     }
     
 }

@@ -26,7 +26,7 @@ import UIKit
 @UIApplicationMain
 class AppDelegate: CCAppDelegate {
     
-    override func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+    override func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]? = nil) -> Bool {
         
         // Cocos2D takes a dictionary to start ... yeah I know ... but it does, and it is kind of neat
         let cocos2dSettings = [
@@ -42,16 +42,16 @@ class AppDelegate: CCAppDelegate {
             //CCSetupPixelFormat : kEAGLColorFormatRGB565
             CCSetupScreenOrientation : CCScreenOrientationLandscape,
             // We really want to use exclusive assets for iPad
-            CCSetupTabletScale2X     : NSNumber(bool: false),
+            CCSetupTabletScale2X     : NSNumber(value: false as Bool),
             // Show FPS
             // We really want this when developing an app
-            CCSetupShowDebugStats    : NSNumber(bool: true)
+            CCSetupShowDebugStats    : NSNumber(value: true as Bool)
             // All the supported keys can be found in CCConfiguration.h
-        ]
+        ] as [String : Any]
 
         // We are done ...
         // Lets get this thing on the road!
-        self.setupCocos2dWithOptions(cocos2dSettings)
+        self.setupCocos2d(options: cocos2dSettings)
         
         
         // File extensions
@@ -71,14 +71,14 @@ class AppDelegate: CCAppDelegate {
         CCBReader.configureCCFileUtils()
 
         // Get the director
-        let director = CCDirector.sharedDirector()
+        let director = CCDirector.shared()
         
         // Create a scene
         //let mainScene = MainScene()
-         let mainScene = CCBReader.loadAsScene("MainScene") //MainScene()
+         let mainScene = CCBReader.load(asScene: "MainScene") //MainScene()
 
         // Run the director with the initial scene
-        director.runWithScene(mainScene)
+        director?.run(with: mainScene)
         
         // Stay positive :)
         return true

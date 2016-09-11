@@ -1,12 +1,12 @@
 import Foundation
 
-class MainScene: CCScene {
+class MainScene: CCNode {
     weak var dpad: CCSprite!
     weak var joystick: CCSprite!
     weak var player: CCSprite!
     
     var stickActive: Bool = false
-    var velocity: CGPoint = CGPointZero
+    var velocity: CGPoint = CGPoint.zero
     var angularVelocity: CGFloat = 0
     var location: CGPoint!
     
@@ -17,10 +17,10 @@ class MainScene: CCScene {
         super.init()
         
         location = location.self
-        self.userInteractionEnabled = true
+        self.isUserInteractionEnabled = true
     }
     
-    override func update(delta: CCTime) {
+    override func update(_ delta: CCTime) {
         if self.velocity.x != 0 || self.velocity.y != 0 {
             player.position = ccpAdd(player.position, self.velocity)
         }
@@ -31,7 +31,7 @@ class MainScene: CCScene {
     }
     
     func dpadStart() {
-        if (CGRectContainsPoint(joystick.boundingBox(), location)) {
+        if (joystick.boundingBox().contains(location)) {
             stickActive = true
         } else {
             stickActive = false
@@ -48,13 +48,13 @@ class MainScene: CCScene {
             let xDist: CGFloat = sin(angle - radians) * length
             let yDist: CGFloat = cos(angle - radians) * length
             
-            joystick.position = CGPointMake(dpad.position.x - xDist, dpad.position.y + yDist)
+            joystick.position = CGPoint(x: dpad.position.x - xDist, y: dpad.position.y + yDist)
             
-            if (CGRectContainsPoint(dpad.boundingBox(), location)) {
+            if (dpad.boundingBox().contains(location)) {
                 joystick.position = location
                 
             } else {
-                joystick.position = CGPointMake(dpad.position.x - xDist, dpad.position.y + yDist)
+                joystick.position = CGPoint(x: dpad.position.x - xDist, y: dpad.position.y + yDist)
             }
             
             self.velocity = ccp(xDist * -speed, yDist * speed)
@@ -66,37 +66,37 @@ class MainScene: CCScene {
     func dpadMovedEnded() {
         if (stickActive == true) {
             let move = CCActionMoveTo(duration: 0.1, position: dpad.position)
-            joystick.runAction(move)
+            joystick.run(move)
         }
         
         self.resetVelocity()
     }
     
     func resetVelocity() {
-        self.velocity = CGPointZero
+        self.velocity = CGPoint.zero
     }
     
     // MARK: - Touch devices
     
 #if os(iOS)
     
-    override func touchBegan(touch: UITouch!, withEvent event: UIEvent!) {
-        location = touch.locationInNode(self)
+    override func touchBegan(_ touch: UITouch!, with event: UIEvent!) {
+        location = touch.location(in: self)
         
         dpadStart()
     }
     
-    override func touchMoved(touch: UITouch!, withEvent event: UIEvent!) {
-        location = touch.locationInNode(self)
+    override func touchMoved(_ touch: UITouch!, with event: UIEvent!) {
+        location = touch.location(in: self)
     
         dpadMoved()
     }
     
-    override func touchEnded(touch: UITouch!, withEvent event: UIEvent!) {
+    override func touchEnded(_ touch: UITouch!, with event: UIEvent!) {
         dpadMovedEnded()
     }
     
-    override func touchCancelled(touch: UITouch!, withEvent event: UIEvent!) {
+    override func touchCancelled(_ touch: UITouch!, with event: UIEvent!) {
         self.resetVelocity()
     }
     
@@ -104,20 +104,20 @@ class MainScene: CCScene {
     
 #elseif os(OSX)
     
-    override func mouseDown(theEvent: NSEvent!) {
-        location = theEvent.locationInNode(self)
+    override func mouseDown(_ theEvent: NSEvent!) {
+        location = theEvent.location(in: self)
         
         dpadStart()
     }
     
-    override func mouseDragged(theEvent: NSEvent!) {
-        location = theEvent.locationInNode(self)
+    override func mouseDragged(_ theEvent: NSEvent!) {
+        location = theEvent.location(in: self)
         
         dpadMoved()
     }
     
-    override func mouseUp(theEvent: NSEvent!) {
-        location = theEvent.locationInNode(self)
+    override func mouseUp(_ theEvent: NSEvent!) {
+        location = theEvent.location(in: self)
         
         dpadMovedEnded()
     }
