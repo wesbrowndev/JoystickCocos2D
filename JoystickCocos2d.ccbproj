@@ -22,6 +22,8 @@
 	<integer>0</integer>
 	<key>excludedFromPackageMigration</key>
 	<false/>
+	<key>excludedFromSpriteBuilderMigration</key>
+	<false/>
 	<key>exporter</key>
 	<string>ccbi</string>
 	<key>fileType</key>
@@ -32,8 +34,14 @@
 	<false/>
 	<key>publishAudioQuality_ios</key>
 	<integer>4</integer>
+	<key>publishAudioQuality_tvos</key>
+	<integer>4</integer>
 	<key>publishDirectory</key>
 	<string>Source/Resources/Published-iOS</string>
+	<key>publishDirectoryAppleTV</key>
+	<string></string>
+	<key>publishEnabledappleTV</key>
+	<false/>
 	<key>publishEnablediPhone</key>
 	<true/>
 	<key>publishEnvironment</key>
@@ -46,6 +54,14 @@
 	<true/>
 	<key>publishResolution_ios_tablethd</key>
 	<true/>
+	<key>publishResolution_tvos_phone</key>
+	<false/>
+	<key>publishResolution_tvos_phonehd</key>
+	<false/>
+	<key>publishResolution_tvos_tablet</key>
+	<false/>
+	<key>publishResolution_tvos_tablethd</key>
+	<false/>
 	<key>publishToZipFile</key>
 	<false/>
 	<key>resourceAutoScaleFactor</key>
@@ -150,9 +166,8 @@
 		</dict>
 	</dict>
 	<key>versionStr</key>
-	<string>revision : 57adab1036
-sku : default
-version : 1.5.0
+	<string>version : 3.5.0
+revision : 4e2214f4e7
 </string>
 </dict>
 </plist>
