@@ -16,7 +16,7 @@ class MainScene: CCNode {
     override init!() {
         super.init()
         
-        location = location.self
+        location = CGPoint()
         self.isUserInteractionEnabled = true
     }
     
@@ -42,8 +42,8 @@ class MainScene: CCNode {
         if (stickActive == true) {
             let vector = CGVector(dx: location.x - dpad.position.x, dy: location.y - dpad.position.y)
             let angle = atan2(vector.dy, vector.dx)
-            let degree = angle * CGFloat(180 / M_PI)
-            let radians = CGFloat(M_PI / 2)
+            let degree = angle * (180 / CGFloat.pi)
+            let radians = CGFloat.pi / 2
             let length: CGFloat = dpad.boundingBox().size.height / 2
             let xDist: CGFloat = sin(angle - radians) * length
             let yDist: CGFloat = cos(angle - radians) * length
