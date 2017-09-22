@@ -1,17 +1,17 @@
 import Foundation
 
 class MainScene: CCNode {
-    weak var dpad: CCSprite!
-    weak var joystick: CCSprite!
-    weak var player: CCSprite!
+    @objc weak var dpad: CCSprite!
+    @objc weak var joystick: CCSprite!
+    @objc weak var player: CCSprite!
     
-    var stickActive: Bool = false
-    var velocity: CGPoint = CGPoint.zero
-    var angularVelocity: CGFloat = 0
+    @objc var stickActive: Bool = false
+    @objc var velocity: CGPoint = CGPoint.zero
+    @objc var angularVelocity: CGFloat = 0
     var location: CGPoint!
     
     // Set the speed of the player's movement 
-    var speed: CGFloat = 0.1
+    @objc var speed: CGFloat = 0.1
     
     override init!() {
         super.init()
@@ -30,7 +30,7 @@ class MainScene: CCNode {
         }
     }
     
-    func dpadStart() {
+    @objc func dpadStart() {
         if (joystick.boundingBox().contains(location)) {
             stickActive = true
         } else {
@@ -38,7 +38,7 @@ class MainScene: CCNode {
         }
     }
     
-    func dpadMoved() {
+    @objc func dpadMoved() {
         if (stickActive == true) {
             let vector = CGVector(dx: location.x - dpad.position.x, dy: location.y - dpad.position.y)
             let angle = atan2(vector.dy, vector.dx)
@@ -63,7 +63,7 @@ class MainScene: CCNode {
         }
     }
     
-    func dpadMovedEnded() {
+    @objc func dpadMovedEnded() {
         if (stickActive == true) {
             let move = CCActionMoveTo(duration: 0.1, position: dpad.position)
             joystick.run(move)
@@ -72,7 +72,7 @@ class MainScene: CCNode {
         self.resetVelocity()
     }
     
-    func resetVelocity() {
+    @objc func resetVelocity() {
         self.velocity = CGPoint.zero
     }
     
