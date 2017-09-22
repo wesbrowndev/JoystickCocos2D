@@ -138,7 +138,7 @@ void CCRENDERER_DEBUG_CHECK_ERRORS(void){
 
 @implementation CCRenderCommandCustom
 {
-	void (^_block)();
+    void (^_block)(void);
 	NSString *_debugLabel;
 	
 	NSInteger _globalSortOrder;
@@ -361,7 +361,7 @@ static NSString *CURRENT_RENDERER_KEY = @"CCRendererCurrent";
 	}
 }
 
--(void)enqueueBlock:(void (^)())block globalSortOrder:(NSInteger)globalSortOrder debugLabel:(NSString *)debugLabel threadSafe:(BOOL)threadsafe
+-(void)enqueueBlock:(void (^)(void))block globalSortOrder:(NSInteger)globalSortOrder debugLabel:(NSString *)debugLabel threadSafe:(BOOL)threadsafe
 {
 	[_queue addObject:[[CCRenderCommandCustom alloc] initWithBlock:block debugLabel:debugLabel globalSortOrder:globalSortOrder]];
 	_lastDrawCommand = nil;

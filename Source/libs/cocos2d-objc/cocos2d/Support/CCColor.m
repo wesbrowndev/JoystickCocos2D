@@ -159,13 +159,13 @@
     {
 	CGFloat r, g, b, a;
         [color getRed:&r green:&g blue:&b alpha:&a];
-	_r = r, _g = g, _b = b, _a = a;
+        (void)(_r = r), (void)(_g = g), (void)(_b = b), _a = a;
     }
     else if (csModel == kCGColorSpaceModelMonochrome)
     {
         CGFloat w, a;
         [color getWhite:&w alpha:&a];
-        _r = w, _g = w, _b = w, _a = a;
+        (void)(_r = w), (void)(_g = w), (void)(_b = w), _a = a;
     }
     else
     {

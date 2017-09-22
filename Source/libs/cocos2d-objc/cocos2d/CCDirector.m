@@ -756,7 +756,7 @@ static CCDirector *_sharedDirector = nil;
 
 	[self stopAnimation];
 
-	_FPSLabel = nil, _SPFLabel=nil, _drawsLabel=nil;
+    (void)(_FPSLabel = nil), (void)(_SPFLabel=nil), _drawsLabel=nil;
 
 	_delegate = nil;
 
